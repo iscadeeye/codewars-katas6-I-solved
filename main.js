@@ -72,14 +72,34 @@ function longestRepetition (string) {
 }
 
 //unit tests.
-//I solved this problem in codewors without the unit test. 
-console.log(longestRepetition('cbdeuuu900') === JSON.stringify(["u", 3]))
-console.log(longestRepetition('aaaabb') === JSON.stringify(["a", 4]))
-console.log(longestRepetition('bbbaaabaaaa') === JSON.stringify(["a", 4]))
+//I solved this problem in codewors without the unit test.
+console.log(longestRepetition('cbdeuuu900') === JSON.stringify(['u', 3]))
+console.log(longestRepetition('aaaabb') === JSON.stringify(['a', 4]))
+console.log(longestRepetition('bbbaaabaaaa') === JSON.stringify(['a', 4]))
 
+//Who likes this
+function likes (names) {
+  let sentence = ''
+  if (names.length === 0) {
+    sentence = `no one likes this`
+    return sentence
+  } else if (names.length === 1) {
+    sentence = `${names[0]} likes this`
+    return sentence
+  } else if (names.length === 2) {
+    sentence = `${names[0]} and ${names[1]} like this`
+    return sentence
+  } else if (names.length === 3) {
+    sentence = `${names[0]}, ${names[1]} and ${names[2]} like this`
+    return sentence
+  } else {
+    sentence = `${names[0]}, ${names[1]} and ${names.length -
+      2} others like this`
+    return sentence
+  }
+}
 
+//Units tests.
 
-
-
-
-
+console.assert(likes(['John', 'Mohamed']) === 'John and Mohamed like this')
+console.assert(likes([]) === 'no one likes this')

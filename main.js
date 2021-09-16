@@ -156,7 +156,7 @@ function high (x) {
   }
   for (let i = 0; i < arrayOfWords.length; i += 1) {
     let currentWord = arrayOfWords[i]
-     //then each iteration, call this function to calculate the word's score.
+    //then each iteration, call this function to calculate the word's score.
     result = stringFunction(currentWord)
     if (hightestScore < result) {
       hightestScore = result
@@ -165,7 +165,6 @@ function high (x) {
   }
   return hightestScoringWord
 }
-
 
 //unit tests
 console.assert(high('man i need a taxi up to ubud') === 'taxi', {
@@ -186,3 +185,41 @@ console.assert(high('take') === 'take', {
   expected: 'take',
   result: high('take')
 })
+
+function comp (array1, array2) {
+  if (array1 === null || array2 === null) {
+    return false
+  }
+  //sort both arrays in ascending order
+  //sorting array1
+  let sortArray1 = array1.sort((a, b) => {
+    return a - b
+  })
+  //sorting array2
+  let sortArray2 = array2.sort((a, b) => {
+    return a - b
+  })
+  //since both array have the same length, loop throgh one of them and each iteration, compare elements of the sorted arrays.
+  //return true if each squared element from sortedArray1 are equal to its counterpart of sortedArray2.
+  let isTrue = true
+  for (let index = 0; index < sortArray1.length; index += 1) {
+    //square each element from sortedArray1
+    let currentElement = sortArray1[index] * sortArray1[index]
+    let currentElementFromSortedArray2 = sortArray2[index]
+    isTrue = currentElement === currentElementFromSortedArray2
+    if (isTrue !== true) {
+      return isTrue //if isTrue becoeme false even once, it means not all elemtents from arrays are equal.
+    }
+  }
+  return isTrue
+}
+
+
+//Units tests.
+let array1 = [121, 144, 19, 161, 19, 144, 19, 11]
+let array2 = [121, 14641, 20736, 361, 25921, 361, 20736, 361]
+
+
+console.assert(comp(array1, array2) === true)
+console.assert(comp(null, [4, 6, 9]) === false)
+console.assert(comp([4, 6, 9], null) === false)

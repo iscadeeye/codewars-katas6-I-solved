@@ -214,12 +214,78 @@ function comp (array1, array2) {
   return isTrue
 }
 
-
 //Units tests.
 let array1 = [121, 144, 19, 161, 19, 144, 19, 11]
 let array2 = [121, 14641, 20736, 361, 25921, 361, 20736, 361]
 
-
 console.assert(comp(array1, array2) === true)
 console.assert(comp(null, [4, 6, 9]) === false)
 console.assert(comp([4, 6, 9], null) === false)
+
+// encryptThis
+
+let switchFunction = word => {
+  let asciiCode = word.charCodeAt(0)
+  let secondLetter = word[1]
+  let lastLetter = word[word.length - 1]
+  // guard the function from running further if the any of these condition is true
+  if (word.length === 1) {
+    return asciiCode
+  } else if (word.length === 2) {
+    return `${asciiCode}${word[1]}`
+  } else {
+    let wordArray = word.split('')
+    wordArray.splice(0, 1, asciiCode)
+    wordArray.splice(1, 1, lastLetter)
+    wordArray.splice(wordArray.length - 1, 1, secondLetter)
+
+    return wordArray.join('')
+  }
+}
+
+let encryptThis = text => {
+  let answerArray = []
+  //turn the text into array of words
+  let arrayOfWords = text.split(' ')
+  //loop through arrayOfWords
+  for (let i = 0; i < arrayOfWords.length; i += 1) {
+    let currentWord = arrayOfWords[i]
+    //this function converts the first letter to its ASCII code, and switches the second and last letters
+
+    let result = switchFunction(currentWord)
+    answerArray[i] = result
+  }
+
+  let encryptedSentence = answerArray.join(' ').trim()
+
+  return encryptedSentence
+}
+
+//Units tests.
+
+console.assert(
+  encryptThis('A wise old owl lived in an oak') ===
+    '65 119esi 111dl 111lw 108dvei 105n 97n 111ka',
+  {
+    expected: '65 119esi 111dl 111lw 108dvei 105n 97n 111ka',
+    result: encryptThis('A wise old owl lived in an oak')
+  }
+)
+
+console.assert(
+  encryptThis('The more he saw the less he spoke') ===
+    '84eh 109ero 104e 115wa 116eh 108sse 104e 115eokp',
+  {
+    expected: '84eh 109ero 104e 115wa 116eh 108sse 104e 115eokp',
+    result: encryptThis('The more he saw the less he spoke')
+  }
+)
+
+console.assert(encryptThis('a') === '97', {
+  expected: '97',
+  result: encryptThis('a')
+})
+console.assert(encryptThis('an') === '97n', {
+  expected: '97n',
+  result: encryptThis('an')
+})

@@ -289,3 +289,28 @@ console.assert(encryptThis('an') === '97n', {
   expected: '97n',
   result: encryptThis('an')
 })
+
+function createPhoneNumber (numbers) {
+  //cut the first three numbers and enclose them wiht parenthesis.
+  let firstThreeNums = numbers.splice(0, 3).join('')
+
+  //array to hold the three middle nums
+  const newArray = []
+  //loop throgh the rest of the array three times.
+  for (let i = 0; i < 3; i += 1) {
+    //push the middle three in this new array
+    newArray.push(numbers[i])
+  }
+
+  // concatenate dash at end of the middle three numbers.
+  newArray[newArray.length] = '-'
+  //cut the last fours numbers in the numbers array and join them.
+  let lastFourNumbs = numbers.splice(3, numbers.length - 1).join('')
+  //create assembly the phone number
+  let phoneNumber = `(${firstThreeNums}) ${newArray.join('')}${lastFourNumbs}`
+  return phoneNumber
+}
+
+console.assert(
+  createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) === '(123) 456-7890'
+)

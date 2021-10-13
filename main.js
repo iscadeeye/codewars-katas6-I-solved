@@ -314,3 +314,18 @@ function createPhoneNumber (numbers) {
 console.assert(
   createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) === '(123) 456-7890'
 )
+
+function reverse (str) {
+  let newString = str.split(' ')
+  for (let i = 1; i < newString.length; i += 2) {
+    let currentWord = newString[i]
+      .split('')
+      .reverse()
+      .join('')
+    newString[i] = currentWord
+  }
+  return newString.join(' ')
+}
+
+console.log(reverse('Reverse this string, please!'))
+

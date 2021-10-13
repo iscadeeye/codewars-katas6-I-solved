@@ -329,3 +329,29 @@ function reverse (str) {
 
 console.log(reverse('Reverse this string, please!'))
 
+// Does my number look big in this
+
+function narcissistic (value) {
+  //turn value into array to get the length of the value so that you can make it the exponent and you can loop through the array as well.
+  let numArr = value.toString().split('')
+  //length of the array which is going to be the exponent.
+  let numLength = numArr.length
+  //The total keeper to compare it with the original value.
+  let total = 0
+  for (let i = 0; i < numArr.length; i += 1) {
+    //chnage the type of the current item to number so that you can do the math.
+    let currentElement = Number(numArr[i])
+    //square each number
+    let squareTheNumber = Math.pow(currentElement, numLength)
+    // add each squared number to the total, which was first initialed with zero 
+    total += squareTheNumber
+  }
+  // check the condition after you loop through and added all the numbers.
+  let isTrueOrIsFalse = total === value ? true : false
+  //return the condition's result.
+  return isTrueOrIsFalse
+}
+
+console.assert(narcissistic(153) === true)
+console.assert(narcissistic(7) === true)
+console.assert(narcissistic(1652) === false)
